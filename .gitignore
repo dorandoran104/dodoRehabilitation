@@ -5,6 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 Apikey.java
+*.properties
 
 ### STS ###
 .apt_generated
@@ -17,7 +18,7 @@ Apikey.java
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-*.properties
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
