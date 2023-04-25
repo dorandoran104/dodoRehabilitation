@@ -159,7 +159,6 @@
 					<!-- commemt 수정시 나타날 공간 -->
 					<tr class="modifyArea">
 					</tr>
-
 				</c:forEach>
 			</table>
 		</div>
