@@ -4,8 +4,7 @@
 	pageEncoding="UTF-8"%>
 <c:set var="pageTitle" value="병원찾기"></c:set>
 
-<script type="text/javascript"
-	src="${api}"></script>
+<script type="text/javascript" src="${api}"></script>
 
 <%@ include file="../common/header.jspf"%>
 
@@ -54,32 +53,26 @@
 					<td colspan="2"><div id="map" style="margin:0 auto; width: 60%; height: 450px"></div></td>
 				</tr>
 				<tr>
-					<td colspan="2"><button class="btn btn-outline-secondary"
-			onclick="location.href = '/hospi/getlist?page=${page}&type=${type}&location=${location}'">병원목록</button>
-		<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-			data-bs-target="#exampleModal" data-bs-whatever="@mdo">정보 수정요청</button></td>
+					<td colspan="2">
+						<button class="btn btn-outline-secondary" onclick="location.href = '/hospi/getlist?page=${page}&type=${type}&location=${location}'">병원목록</button>
+						<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">정보 수정요청</button>
+					</td>
 				</tr>
 			</table>
 		</div>
-		
-		
 		<input type="hidden" id="wgs84Lat" value="${hospital.wgs84Lat}" /> 
 		<input type="hidden" id="wgs84Lon" value="${hospital.wgs84Lon }" />
-		
-		
 	</div>
 	
-	<div class="mt-1">
-		
 		<!-- 정보 수정 폼 -->
+	<div class="mt-1">
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5" id="exampleModalLabel">정보수정요청</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<form action="/admin/abWrite" method="post">
@@ -100,8 +93,7 @@
 								<textarea name="body" class="form-control" id="message-text"></textarea>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">닫기</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 								<button type="reset" class="btn btn-primary">초기화</button>
 								<button type="submit" onclick="return info_check()" class="btn btn-primary">전송</button>
 							</div>
@@ -110,9 +102,10 @@
 				</div>
 			</div>
 		</div>
-		
+		<!-- 정보 수정 끝 -->
 	</div>
 
+	<!--  -->
 	<div class="mt-4">
 		<div>
 			<div class="d-flex">
@@ -122,45 +115,48 @@
 				</h6>
 			</div>
 			<form action="/comm/dowrite" method="post">
-				<input type="hidden" name="hpid" value="${hospital.hpid}" /> <input
-					type="hidden" name="page" value="${page}" /> <input type="hidden"
-					name="type" value="${type}" /> <input type="hidden"
-					name="location" value="${location}" />
+				<input type="hidden" name="hpid" value="${hospital.hpid}" /> 
+				<input type="hidden" name="page" value="${page}" /> 
+				<input type="hidden" name="type" value="${type}" />
+				<input type="hidden" name="location" value="${location}" />
 				<div class="form-floating d-flex">
 					<textarea class="form-control" placeholder="comment" name="body"
 						id="floatingTextarea2" style="height: 100px"
 						onclick="login_Check()" maxlength="350"></textarea>
+					
 					<input type="submit" onclick="login_Check()" value="작성"
 						id="comment_submit" class="btn btn-outline-secondary" />
 				</div>
 			</form>
 		</div>
+		
 		<div>
 			<table class="table w-100 align-middle">
 				<c:forEach var="comments" items="${comment}" varStatus="status">
-					<tr
-						style="background-color: ${status.index % 2 ==0 ? 'rgba(255,255,255,0.7)':''}">
+					<tr style="background-color: ${status.index % 2 ==0 ? 'rgba(255,255,255,0.7)':''}">
 						<td style="width: 10%;">${comments.NICKNAME}</td>
 						<td style="width: 60%;">${comments.BODY}</td>
 
 						<c:choose>
 							<c:when test="${comments.USERID == sessionScope.loginUser}">
-								<td style="width: 20%;"><fmt:formatDate
-										value="${comments.UPDATEDATE}" type="both" /></td>
-								<td style="width: 5%"><button
-										class="btn btn-outline-secondary btn-sm"
-										onclick="modify(${status.index},'${hospital.hpid}',${comments.ID},'${comments.BODY}',${page},${type},'${location}')">수정</button></td>
-								<td style="width: 5%"><a
-									href="/comm/dodelete?hpid=${hospital.hpid}&id=${comments.ID}&page=${page}&type=${type}&location=${location}"
-									class="btn btn-outline-secondary btn-sm"
-									onclick="return confirm('삭제하시겠습니까?')">삭제</a></td>
+								<td style="width: 20%;">
+									<fmt:formatDate value="${comments.UPDATEDATE}" type="both" />
+								</td>
+								<td style="width: 5%">
+									<button class="btn btn-outline-secondary btn-sm" onclick="modify(${status.index},'${hospital.hpid}',${comments.ID},'${comments.BODY}',${page},${type},'${location}')">수정</button></td>
+								<td style="width: 5%">
+									<a href="/comm/dodelete?hpid=${hospital.hpid}&id=${comments.ID}&page=${page}&type=${type}&location=${location}" class="btn btn-outline-secondary btn-sm"
+									onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+								</td>
 							</c:when>
 							<c:otherwise>
-								<td colspan="3" style="width: 20%;"><fmt:formatDate
-										value="${comments.UPDATEDATE}" type="both" /></td>
+								<td colspan="3" style="width: 20%;">
+									<fmt:formatDate value="${comments.UPDATEDATE}" type="both" />
+								</td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
+					<!-- commemt 수정시 나타날 공간 -->
 					<tr class="modifyArea">
 					</tr>
 
