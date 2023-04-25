@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+body {
+	margin: 0;
+	background-size: cover;
+	font-family: 'GmarketSansMedium';
+	font-size: 0.9rem;
+	background-color: #c9c9c9;
+	margin: 0;
+}
+
+.custom_container, .index-container, .bug-container {
+	padding-top: 20px;
+	margin-bottom: 30px;
+}
+
+.index-container{
+	height : 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.hostable_table {
+	background-color: white;
+}

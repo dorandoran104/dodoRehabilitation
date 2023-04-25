@@ -1,0 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<footer
+	style="height: 40px; background-color: #c9c9c9; margin: 0; padding: 0">
+
+</footer>
+</body>
+</html>

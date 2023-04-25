@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.example.demo.repository.BugBoardRepository">
+
+	<select id="getList"
+		resultType="com.example.demo.dto.BugBoardDTO">
+		select * from bboard order by id desc
+	</select>
+
+	<insert id="writeBboard">
+		insert into bboard(id, title, body, nickname,secret, usernum)
+		values(bb_id_seq.nextval, #{title},#{body},#{nickname},#{secret},#{userNum})
+	</insert>
+
+	<select id="getLastId" resultType="int">
+		select bb_id_seq.currval from dual
+	</select>
+	
+	<select id="getBoard" resultType="com.example.demo.dto.BugBoardDTO">
+		select * from bboard where id = #{id}
+	</select>
+	
+	<update id="modifyBoard">
+		update bboard
+		set title = #{title},
+		body = #{body},
+		updatedate = sysdate,
+		secret = #{secret}
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteBoard">
+		delete bboard
+		where id = #{id}
+	</delete>
+</mapper>
