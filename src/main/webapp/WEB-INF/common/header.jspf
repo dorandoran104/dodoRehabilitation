@@ -44,7 +44,6 @@
 							onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a></li>
 					</c:otherwise>
 				</c:choose>
-				
 			</ul>
 		</div>
 	</div>

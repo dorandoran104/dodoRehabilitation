@@ -26,9 +26,8 @@
 			<label class="form-check-label" for="flexRadioDefault1"> 전체 공개 </label>
 		</div>
 		<div class="form-check">
-			<input class="form-check-input" type="radio" name="secret" value="1"
-				id="flexRadioDefault2"> <label
-				class="form-check-label" for="flexRadioDefault2"> 운영자만 공개 </label>
+			<input class="form-check-input" type="radio" name="secret" value="1" id="flexRadioDefault2"> 
+			<label class="form-check-label" for="flexRadioDefault2"> 운영자만 공개 </label>
 		</div>
 
 		<input type="submit" value="수정" class="btn btn-dark" /> 
