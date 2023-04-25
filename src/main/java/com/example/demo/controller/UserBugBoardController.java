@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.dto.BugBoardDTO;
-import com.example.demo.dto.MemberDTO;
 import com.example.demo.service.BugBoardService;
 import com.example.demo.service.MemberService;
 

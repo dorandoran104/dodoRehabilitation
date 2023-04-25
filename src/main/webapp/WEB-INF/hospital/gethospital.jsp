@@ -3,64 +3,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <c:set var="pageTitle" value="병원찾기"></c:set>
+
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9f2d8a1e6980a20e6e4c0db8cd11ba3e"></script>
+	src="${api}"></script>
 
 <%@ include file="../common/header.jspf"%>
 
 <div class="container pt-3">
-	<div class=" d-flex">
-		<table class="table table-light" style="height : 450px; margin : 0;">
-			<tr>
-				<td width="90">병원</td>
-				<td style="width:50%" id="hpName">${hospital.dutyName }</td>
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td>${hospital.dutyAddr }</td>
-			</tr>
-			<tr>
-				<td>전화번호</td>
-				<td>${hospital.dutyTel1 }</td>
-			</tr>
-			<tr>
-				<td rowspan="8">진료시간</td>
-				<td>월 : ${hospital.dutyTime1s }</td>
-			</tr>
-			<tr>
-				<td>화 : ${hospital.dutyTime2s }</td>
-			</tr>
-			<tr>
-				<td>수 : ${hospital.dutyTime3s }</td>
-			</tr>
-			<tr>
-				<td>목 : ${hospital.dutyTime4s }</td>
-			</tr>
-			<tr>
-				<td>금 : ${hospital.dutyTime5s }</td>
-			</tr>
-			<tr>
-				<td>토 : ${hospital.dutyTime6s }</td>
-			</tr>
-			<tr>
-				<td>일 : ${hospital.dutyTime7s}</td>
-			</tr>
-			<tr>
-				<td>공휴일 : ${hospital.dutyTime8s }</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="height:450px"><div id="map" style="margin:0 auto; width: 90%; height: 100%"></div></td>
-			</tr>
-		</table>
-		
-		<input type="hidden" id="wgs84Lat" value="${hospital.wgs84Lat}" /> <input
-			type="hidden" id="wgs84Lon" value="${hospital.wgs84Lon }" />
-	</div>
-	<div class="mt-1">
-		<button class="btn btn-outline-secondary"
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-light" style=" width : 100%; height : 450px;">
+				<tr>
+					<td style="width:10%">병원</td>
+					<td id="hpName">${hospital.dutyName }</td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td>${hospital.dutyAddr }</td>
+				</tr>
+				<tr>
+					<td>전화번호</td>
+					<td>${hospital.dutyTel1 }</td>
+				</tr>
+				<tr>
+					<td rowspan="8">진료시간</td>
+					<td>월 : ${hospital.dutyTime1s }</td>
+				</tr>
+				<tr>
+					<td>화 : ${hospital.dutyTime2s }</td>
+				</tr>
+				<tr>
+					<td>수 : ${hospital.dutyTime3s }</td>
+				</tr>
+				<tr>
+					<td>목 : ${hospital.dutyTime4s }</td>
+				</tr>
+				<tr>
+					<td>금 : ${hospital.dutyTime5s }</td>
+				</tr>
+				<tr>
+					<td>토 : ${hospital.dutyTime6s }</td>
+				</tr>
+				<tr>
+					<td>일 : ${hospital.dutyTime7s}</td>
+				</tr>
+				<tr>
+					<td>공휴일 : ${hospital.dutyTime8s }</td>
+				</tr>
+				<tr>
+					<td colspan="2"><div id="map" style="margin:0 auto; width: 60%; height: 450px"></div></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button class="btn btn-outline-secondary"
 			onclick="location.href = '/hospi/getlist?page=${page}&type=${type}&location=${location}'">병원목록</button>
 		<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-			data-bs-target="#exampleModal" data-bs-whatever="@mdo">정보 수정요청</button>
+			data-bs-target="#exampleModal" data-bs-whatever="@mdo">정보 수정요청</button></td>
+				</tr>
+			</table>
+		</div>
+		
+		
+		<input type="hidden" id="wgs84Lat" value="${hospital.wgs84Lat}" /> 
+		<input type="hidden" id="wgs84Lon" value="${hospital.wgs84Lon }" />
+		
+		
+	</div>
+	
+	<div class="mt-1">
+		
 		<!-- 정보 수정 폼 -->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">

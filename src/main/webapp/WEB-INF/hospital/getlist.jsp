@@ -46,12 +46,12 @@ String[] loc = { "강남구", "강동구", "강북구", "강서구", "관악구"
 
 
 		<!-- 병원 리스트 -->
-		<table class="table mt-3 align-middle table-hover">
+		<table class="table mt-3 align-middle table-hover" style="width : 100%">
 			<c:forEach var="list" items="${list}">
-				<tr>
-					<td style="height : 60px;">
+				<tr style="height : 80px;">
+					<td>
 						<div><a class="fs-4" href="/hospi/gethospital?hpid=${list.hpid}&page=${page}&type=${type}&location=${location}">${list.dutyName}</a></div>
-						<div>${list.dutyAddr}</div>
+						<div style="background-color: rgba(255,255,255,0.4)" >${list.dutyAddr}</div>
 					</td>
 					<!-- <td style="height : 50px;">
 						<c:choose>
@@ -80,7 +80,7 @@ String[] loc = { "강남구", "강동구", "강북구", "강서구", "관악구"
 					</c:forEach>
 					
 				 -->
-				 	<c:forEach var="count" begin="${(Math.ceil(page/5)-1)*5+1}" end="${Math.floor(size/5)*5+1 <=page?size: Math.ceil(page/5)*5}">
+				 	<c:forEach var="count" begin="${ (Math.ceil(page/5)-1)*5+1 }" end="${Math.floor(size/5)*5+1 <=page?size: Math.ceil(page/5)*5}">
 						<li class="page-item ${page == count ?'active':''}">
 						<a class="page-link" href="/hospi/getlist?page=${count}&type=${type}&location=${location}">${count}</a></li>
 					</c:forEach>

@@ -4,11 +4,11 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+Apikey.java
 
 ### STS ###
 .apt_generated
 .classpath
-.properties
 .factorypath
 .project
 .settings
@@ -17,7 +17,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-
+*.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws

@@ -3,14 +3,13 @@ package com.example.demo.controller;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.apikey.Apikey;
 import com.example.demo.dto.CommentDTO;
 import com.example.demo.dto.HospitalDTO;
 import com.example.demo.service.CommentService;
@@ -51,6 +50,9 @@ public class UserHospitalController {
 		model.addAttribute("page",page);
 		model.addAttribute("type",type);
 		model.addAttribute("location",location);
+		
+		String kakaoApi = new Apikey().getKakao();
+		model.addAttribute("api",kakaoApi);
 		return "hospital/gethospital";
 	}
 }

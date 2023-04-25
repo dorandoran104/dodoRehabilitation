@@ -14,6 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.example.demo.apikey.Apikey;
 import com.example.demo.dto.AdminBoardDTO;
 import com.example.demo.repository.AdminBoardRepository;
 
@@ -28,10 +29,11 @@ public class AdminBoardService {
 
 	// XML가져와서 출력/DB저장
 	public int getHospitalList() throws SAXException, IOException, ParserConfigurationException {
+		String apiKey = new Apikey().getApiKey();
 		int page = 1;
 		while(true) {
 			StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire"); /*URL*/
-	        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "jkRa65eio19MTFuczTtC%2BrWjuIp%2FjbD7t0FO4ieapDtbadTVNmxuakATqBiRDfH2PxVdcpe7vWGR3Oz6VVS4Pw%3D%3D"); /*Service Key*/
+	        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + apiKey); /*Service Key*/
 	        urlBuilder.append("&" + URLEncoder.encode("Q0","UTF-8") + "=" + URLEncoder.encode("서울특별시", "UTF-8")); /*주소(시도)*/
 	        //urlBuilder.append("&" + URLEncoder.encode("Q1","UTF-8") + "=" + URLEncoder.encode("강서구", "UTF-8")); /*주소(시군구)*/
 	        //urlBuilder.append("&" + URLEncoder.encode("QZ","UTF-8") + "=" + URLEncoder.encode("B", "UTF-8")); /*CODE_MST의'H000' 참조(B:병원, C:의원)*/
