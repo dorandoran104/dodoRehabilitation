@@ -37,10 +37,10 @@
 				</c:if>
 				<c:choose>
 					<c:when test="${loginUser == null }">
-						<li class="nav-item"><a class="nav-link" href="/mem/login">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item"><a class="nav-link" href="/mem/dologout"
+						<li class="nav-item"><a class="nav-link" href="/member/dologout"
 							onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a></li>
 					</c:otherwise>
 				</c:choose>

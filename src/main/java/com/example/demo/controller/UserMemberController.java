@@ -14,7 +14,7 @@ import com.example.demo.dto.MemberDTO;
 import com.example.demo.service.MemberService;
 
 @Controller
-@RequestMapping("/mem")
+@RequestMapping("/member")
 public class UserMemberController {
 
 	@Autowired
