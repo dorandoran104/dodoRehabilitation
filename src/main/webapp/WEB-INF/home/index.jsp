@@ -11,12 +11,13 @@ String[] loc = { "강남구", "강동구", "강북구", "강서구", "관악구"
 <!-- Page Content-->
 
 <div class="container index-container">
+	
 	<form action="/hospi/getlist" style="width : 70%">
 		<input type="hidden" name="page" value="1" /> 
 		<select name="type" id="type" class="form-select mt-3">
 			<option value="0" selected="selected">병원</option>
 			<option value="1">의원</option>
-		</select> 
+		</select>
 		<select name="location" id="location" class="form-select mt-3">
 			<c:forEach var="loc" items="<%=loc%>">
 				<option value="${loc }">${loc }</option>

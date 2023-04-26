@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.HospitalDTO;
+import com.example.demo.dto.PageCriteriaDTO;
 import com.example.demo.repository.HospitalRepository;
 
 @Service
@@ -17,10 +18,8 @@ public class HospitalService {
 	}		
 	
 	//page로 db 가져올 범위 정하기
-	public List<HospitalDTO> getList(int type, String location, int page) {
-		int start = (page-1)*15;
-		int end = page*15-1;
-		List<HospitalDTO> list = hospitalRepository.getList(type, location,start, end);
+	public List<HospitalDTO> getList(PageCriteriaDTO cri) {
+		List<HospitalDTO> list = hospitalRepository.getList(cri);
 		return list;
 	}
 
@@ -29,12 +28,9 @@ public class HospitalService {
 		return hospital;
 	}
 
-	public int getLastId(int type, String location) {
-		int getLastId = hospitalRepository.getLastId(type, location);
-		if(getLastId%15 != 0) {
-			getLastId= getLastId/15+1;
-		}
-		return getLastId;
+	public int getTotal(int type, String location) {
+		int getTotal = hospitalRepository.getTotal(type, location);
+		return getTotal;
 	}
 
 

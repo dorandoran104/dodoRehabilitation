@@ -19,16 +19,11 @@ CREATE TABLE hospitallist (
     wgs84lon   VARCHAR2(25)
 );
 
-SELECT
-    *
-FROM
-    hospitallist;
+select * from user_constraints where table_name = 'HOSPITALLIST';
 
-UPDATE hospitallist
-SET
-    dutytime1s = 'ÈÞÁø'
-WHERE
-    dutytime1s = 'null~null';
+create index addr_ind on hospitallist(dutyaddr);
+
+alter table hospitallist add unique(dutyaddr);
 
 COMMIT;
 --´ñ±Û Å×ÀÌºí+½ÃÄö½º
@@ -66,22 +61,6 @@ CREATE TABLE member (
     delmember CHAR(1) DEFAULT 0,
     deldate   DATE
 );
-
-INSERT INTO member (
-    id,
-    nickname,
-    userid,
-    userpwd
-) VALUES (
-    - 1,
-    'admin',
-    'admin',
-    'admin'
-);
-
-COMMIT;
-
-COMMIT;
 
 CREATE SEQUENCE mem_id_seq START WITH 1;
 
@@ -122,12 +101,24 @@ CREATE TABLE adminboard (
 CREATE SEQUENCE ad_bo_seq;
 
 SELECT
-    a.*,
-    h.dutyname AS dutyname
+    /*+ INDEX(hospitallist addr_ind) */
+    r,
+    hpid,
+    dutyname,
+    dutydivnam,
+    dutyaddr
 FROM
-    adminboard   a
-    LEFT JOIN hospitallist h ON ( a.hpid = h.hpid )
-ORDER BY
-    id DESC;
-
-ROLLBACK;
+    (
+        SELECT
+            ROWNUM r,
+            hpid,
+            dutyname,
+            dutydivnam,
+            dutyaddr
+        FROM
+            hospitallist
+        WHERE
+            dutyaddr LIKE '%°­³²±¸%'
+    )
+WHERE
+    r BETWEEN 15 AND 30;

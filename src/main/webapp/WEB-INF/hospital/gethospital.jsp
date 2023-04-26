@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button class="btn btn-outline-secondary" onclick="location.href = '/hospi/getlist?page=${page}&type=${type}&location=${location}'">병원목록</button>
+						<button class="btn btn-outline-secondary" onclick="location.href = '/hospi/getlist?page=${cri.page}&type=${cri.type}&location=${cri.location}'">병원목록</button>
 						<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">정보 수정요청</button>
 					</td>
 				</tr>

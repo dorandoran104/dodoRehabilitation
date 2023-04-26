@@ -7,28 +7,12 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.demo.dto.HospitalDTO;
+import com.example.demo.dto.PageCriteriaDTO;
 
 @Mapper
 public interface HospitalRepository {
 
-	@Select("""
-			<script>
-			select
-				*
-			from 
-				(select rownum as r, h.*
-				from hospitallist h
-				where 
-				dutyDivNam = #{type}
-				<if test=" location !='' ">
-					and dutyAddr like '%'||#{location}||'%' 
-				</if>
-				) h
-			where
-				r between #{start} and #{end}
-			</script>
-			""")
-	List<HospitalDTO> getList( @Param("type") int type, @Param("location") String location, @Param("start") int start, @Param("end") int end);
+	List<HospitalDTO> getList(PageCriteriaDTO cri);
 
 	@Select("""
 			select
@@ -52,19 +36,7 @@ public interface HospitalRepository {
 			""")
 	HospitalDTO getHospital(String hpid);
 
-	@Select("""
-			<script>
-			select
-				count(dutyname)
-			from 
-				hospitallist
-			where
-				dutyDivNam = #{type}
-				<if test=" location !='' ">
-					and dutyAddr like '%'||#{location}||'%' 
-				</if>
-			</script>
-			""")
-	int getLastId(@Param("type") int type,@Param("location") String location);
+	
+	int getTotal(@Param("type") int type,@Param("location") String location);
 
 }
