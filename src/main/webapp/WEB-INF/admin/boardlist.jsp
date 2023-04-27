@@ -40,7 +40,7 @@
 
 
 <div class="container bug_container">
-	<table class="table">
+	<table class="table table-hover">
 		<tr class="bg-light">
 			<th>번호</th>
 			<td>유형</td>
@@ -51,17 +51,15 @@
 			
 		</tr>
 		<c:forEach var="list" items="${list}">
+		<tr>
 			<td>${list.id}</td>
 			<td>${list.type}</td>
 			<td>${list.body}</td>
-			<td>${list.dutyname}</td>
+			<td><a href="/hospi/gethospital?hpid=${list.hpid}">${list.dutyname}</a></td>
 			<td>${list.writer}</td>
-			
+		</tr>
 		</c:forEach>
 	</table>
-	<a href="/bboard/writeForm" class="btn btn-dark"
-		onclick="return login_check(${sessionScope.loginUser})">작성</a>
-
 </div>
 <script type="text/javascript" src="/js/bboard.js">
 

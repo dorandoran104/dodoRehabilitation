@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.dto.CommentDTO;
 import com.example.demo.service.CommentService;
 import com.example.demo.service.MemberService;
 
@@ -24,17 +25,21 @@ public class UserCommentController {
 	private MemberService memberService;
 	
 	@PostMapping("/dowrite")
-	public String doWrite(HttpServletRequest request,HttpSession session, String body, String hpid) {
+	public String doWrite(HttpServletRequest request,HttpSession session, CommentDTO comment) {
 		String url = request.getHeader("referer");
-		int id =  (int) session.getAttribute("loginUser");
-		String nickname = memberService.getNickname(id);
-		commentService.doWrite(hpid,body,nickname,id);
+		int userid =  (int) session.getAttribute("loginUser");
+		String nickname = memberService.getNickname(userid);
+		
+		comment.setUserid(userid);
+		comment.setNickname(nickname);
+		
+		commentService.doWrite(comment);
 		return "redirect:"+url;
 	}
 	
 	@PostMapping("/domodify")
-	public String doModify(HttpServletRequest request,int id, String body) throws UnsupportedEncodingException {
-		commentService.doModify(id, body);
+	public String doModify(HttpServletRequest request, CommentDTO comment) throws UnsupportedEncodingException {
+		commentService.doModify(comment);
 		String url = request.getHeader("referer");
 		return "redirect:"+url;
 	}

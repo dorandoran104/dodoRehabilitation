@@ -21,18 +21,12 @@ public class CommentService {
 		return list;
 	}
 
-	public void doWrite(String hpid, String body, String nickname, int id) {
-		CommentDTO comment = new CommentDTO();
-		comment.setHpid(hpid);
-		comment.setBody(body);
-		comment.setNickname(nickname);
-		comment.setUserid(id);
-		
+	public void doWrite(CommentDTO comment) {
 		commentRepository.insertComment(comment);
 	}
 
-	public void doModify(int id, String body) {
-		commentRepository.doModify(id, body);
+	public void doModify(CommentDTO comment) {
+		commentRepository.doModify(comment);
 	}
 
 	public void doDelete(int id) {

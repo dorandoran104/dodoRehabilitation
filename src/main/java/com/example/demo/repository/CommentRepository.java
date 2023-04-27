@@ -13,7 +13,7 @@ public interface CommentRepository {
 
 	void insertComment(CommentDTO comment);
 
-	void doModify(@Param("id")int id,@Param("body") String body);
+	void doModify(CommentDTO comment);
 
 	void doDelete(int id);
 

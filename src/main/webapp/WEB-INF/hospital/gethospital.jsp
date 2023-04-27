@@ -50,7 +50,7 @@
 					<td>공휴일 : ${hospital.dutyTime8s }</td>
 				</tr>
 				<tr>
-					<td colspan="2"><div id="map" style="margin:0 auto; width: 60%; height: 450px"></div></td>
+					<td colspan="2"><div id="map" style="margin:0 auto; width: 100%; height: 450px"></div></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -105,20 +105,23 @@
 		<!-- 정보 수정 끝 -->
 	</div>
 
-	<!--  -->
-	<div class="mt-4">
-		<div>
+	<!-- 코멘트 관련  -->
+	<div class="mt-4 row">
+		<div class="col-md-12">
 			<div class="d-flex">
 				<h4>병원 장터</h4>
 				<h6>
 					<span class="badge bg-secondary ms-2">${comment.size()}</span>
 				</h6>
 			</div>
-			<form action="/comm/dowrite" method="post">
+			
+			<form id="commentForm" action="/comm/dowrite" method="post">
 				<input type="hidden" name="hpid" value="${hospital.hpid}" /> 
+				
 				<input type="hidden" name="page" value="${page}" /> 
 				<input type="hidden" name="type" value="${type}" />
 				<input type="hidden" name="location" value="${location}" />
+				
 				<div class="form-floating d-flex">
 					<textarea class="form-control" placeholder="comment" name="body"
 						id="floatingTextarea2" style="height: 100px"
@@ -132,8 +135,10 @@
 		
 		<div>
 			<table class="table w-100 align-middle">
+				
 				<c:forEach var="comments" items="${comment}" varStatus="status">
 					<tr style="background-color: ${status.index % 2 ==0 ? 'rgba(255,255,255,0.7)':''}">
+						
 						<td style="width: 10%;">${comments.NICKNAME}</td>
 						<td style="width: 60%;">${comments.BODY}</td>
 
@@ -143,10 +148,9 @@
 									<fmt:formatDate value="${comments.UPDATEDATE}" type="both" />
 								</td>
 								<td style="width: 5%">
-									<button class="btn btn-outline-secondary btn-sm" onclick="modify(${status.index},'${hospital.hpid}',${comments.ID},'${comments.BODY}',${page},${type},'${location}')">수정</button></td>
+									<a href="${comments.ID}" class="btn btn-outline-secondary btn-sm c_modify" data-body="${comments.BODY}" data-index="${status.index}">수정</a></td>
 								<td style="width: 5%">
-									<a href="/comm/dodelete?hpid=${hospital.hpid}&id=${comments.ID}&page=${page}&type=${type}&location=${location}" class="btn btn-outline-secondary btn-sm"
-									onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+									<a href="${comments.ID}" class="btn btn-outline-secondary btn-sm c_delete" >삭제</a>
 								</td>
 							</c:when>
 							<c:otherwise>
@@ -157,7 +161,16 @@
 						</c:choose>
 					</tr>
 					<!-- commemt 수정시 나타날 공간 -->
-					<tr class="modifyArea">
+					<tr class="modifyArea" style="display:none;">
+						<td class="modifyTd" colspan="5">
+							<div class="d-flex align-items-center">
+								<textarea class="form-control modify_comm" data-index="${status.index}" rows="5">${comments.BODY}</textarea>
+								<div>
+									<a href="${comments.ID}" data-index="${status.index}" class="btn btn-outline-secondary modify_comm_submit">수정</a>
+									<a type="button" class="btn btn-outline-secondary modify_comm_end">취소</a>
+								</div>
+							</div>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -179,7 +192,7 @@
 		}
 	}
 </script>
-<script src="/js/hospital.js"></script>
+
 <script src="/js/comment.js"></script>
 <script src="/js/map.js"></script>
 

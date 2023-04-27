@@ -45,7 +45,7 @@ public class UserHospitalController {
 		
 		return "hospital/getlist";
 	}
-	//특정 병원 조회
+	//병원 상세 조회
 	@GetMapping("/gethospital")
 	public String getHospital(Model model, String hpid, PageCriteriaDTO cri) throws UnsupportedEncodingException {
 		HospitalDTO hospital = hospitalService.getHospital(hpid);
