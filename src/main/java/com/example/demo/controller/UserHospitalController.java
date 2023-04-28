@@ -19,13 +19,15 @@ import com.example.demo.dto.PageDTO;
 import com.example.demo.service.CommentService;
 import com.example.demo.service.HospitalService;
 
+import lombok.AllArgsConstructor;
+
 //병원 정보 컨트롤러
 @Controller
 @RequestMapping("/hospi")
+@AllArgsConstructor
 public class UserHospitalController {
-	@Autowired
+	
 	private HospitalService hospitalService;
-	@Autowired
 	private CommentService commentService;
 	
 //	public UserHospitalController(HospitalService hospitalService, CommentService commentService) {
@@ -35,9 +37,10 @@ public class UserHospitalController {
 	//병원 리스트 조회
 	@GetMapping("/getlist")
 	public String getList(Model model, PageCriteriaDTO cri) {
+		System.out.println(cri);
 		List<HospitalDTO> list = hospitalService.getList(cri);
 		
-		int total = hospitalService.getTotal(cri.getType(),cri.getLocation());
+		int total = hospitalService.getTotal(cri);
 		PageDTO pageDTO = new PageDTO(cri,total);
 		
 		model.addAttribute("list",list);

@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.HospitalRepository">
+	<sql id="criteria">
+		<trim prefix="where" prefixOverrides="and">
+			<if test='type != null'>
+				and dutydivnam = #{type,jdbcType=INTEGER}
+			</if>
+			<if test='keyword != null'>
+				and dutyname like '%'||#{keyword}||'%'
+			</if>
+			<if test='location != null'>
+				and dutyaddr like '%'||#{location,jdbcType=VARCHAR}||'%'
+			</if>
+		</trim>
+	</sql>
+	
 	
 	<select id="getList" resultType="com.example.demo.dto.HospitalDTO">
 		select
 			 /*+ INDEX(hospitallist addr_ind) */
-			r
-			, hpid
+			hpid
 			,dutyname
 			,dutydivnam,
 			dutyaddr
@@ -26,14 +39,41 @@
 			r between (#{page}-1)*15 and #{page}*15-1
 	</select>
 	
+	<select id="getKeyWoardList" resultType="com.example.demo.dto.HospitalDTO">
+		<![CDATA[
+		select
+			 /*+ INDEX(hospitallist addr_ind) */
+			hpid
+			,dutyname
+			,dutydivnam
+			,dutyaddr
+		from
+			(select
+				rownum r
+				,hpid
+				,dutyname
+				,dutydivnam
+				,dutyaddr
+			from
+				hospitallist
+			]]>
+		<include refid="criteria"></include>
+				<![CDATA[
+				)
+		where
+			r between (#{page}-1)*15 and #{page}*15-1
+			]]>
+	</select>
+	
+	
+	
+	
 	<select id="getTotal" resultType="int">
 		select
 			 /*+ INDEX(hospitallist HOS_HPID_PK) */
 				count(hpid)
 			from 
 				hospitallist
-			where
-				dutyDivNam = #{type}
-				and dutyAddr like '%'||#{location}||'%' 
+			<include refid="criteria"></include> 
 	</select>
 </mapper>

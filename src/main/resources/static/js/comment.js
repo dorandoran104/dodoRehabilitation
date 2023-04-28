@@ -7,11 +7,14 @@ $(document).ready(function() {
 	let commentForm = $("#commentForm");
 
 	$(".c_delete").on("click", function(e) {
+		if(confirm('삭제하시겠습니까')){
 		e.preventDefault();
 		commentForm.attr("action", "/comm/dodelete").attr("method", "get");
 		commentForm.empty();
 		commentForm.append("<input type='hidden' name='id' value='" + $(this).attr("href") + "'>'");
 		commentForm.submit();
+		}
+		return false;
 	});
 	
 	

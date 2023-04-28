@@ -13,13 +13,14 @@ import com.example.demo.dto.BugBoardDTO;
 import com.example.demo.service.BugBoardService;
 import com.example.demo.service.MemberService;
 
+import lombok.AllArgsConstructor;
+
 @Controller
 @RequestMapping("/bboard")
+@AllArgsConstructor
 public class UserBugBoardController {
 
-	@Autowired
 	private BugBoardService bugboardService;
-	@Autowired
 	private MemberService memberService;
 	
 	@GetMapping("/getlist")

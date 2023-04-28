@@ -19,14 +19,15 @@ import com.example.demo.dto.AdminBoardDTO;
 import com.example.demo.service.AdminBoardService;
 import com.example.demo.service.MemberService;
 
+import lombok.AllArgsConstructor;
+
 @Controller
 @RequestMapping("/admin")
+@AllArgsConstructor
 public class AdminBoardController {
 	
-	@Autowired
-	private AdminBoardService adminBoardService;
 	
-	@Autowired
+	private AdminBoardService adminBoardService;
 	private MemberService memberService;
 	
 	@GetMapping("/updateForm")

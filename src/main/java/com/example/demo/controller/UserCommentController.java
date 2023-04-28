@@ -15,13 +15,14 @@ import com.example.demo.dto.CommentDTO;
 import com.example.demo.service.CommentService;
 import com.example.demo.service.MemberService;
 
+import lombok.AllArgsConstructor;
+
 @Controller
 @RequestMapping("/comm")
+@AllArgsConstructor
 public class UserCommentController {
 
-	@Autowired
-	private CommentService commentService;
-	@Autowired 
+	private CommentService commentService; 
 	private MemberService memberService;
 	
 	@PostMapping("/dowrite")

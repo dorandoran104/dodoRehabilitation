@@ -20,7 +20,7 @@ String[] loc = { "강남구", "강동구", "강북구", "강서구", "관악구"
 		</select>
 		<select name="location" id="location" class="form-select mt-3">
 			<c:forEach var="loc" items="<%=loc%>">
-				<option value="${loc }">${loc }</option>
+				<option value="${loc}">${loc }</option>
 			</c:forEach>
 		</select> <input type="submit" value="병원찾기" class="btn btn-dark mt-3 w-100"/>
 	</form>

@@ -13,6 +13,9 @@ import com.example.demo.dto.PageCriteriaDTO;
 public interface HospitalRepository {
 
 	List<HospitalDTO> getList(PageCriteriaDTO cri);
+	
+	
+	List<HospitalDTO> getKeyWoardList(PageCriteriaDTO cri);
 
 	@Select("""
 			select
@@ -37,6 +40,6 @@ public interface HospitalRepository {
 	HospitalDTO getHospital(String hpid);
 
 	
-	int getTotal(@Param("type") int type,@Param("location") String location);
+	int getTotal(PageCriteriaDTO cri);
 
 }

@@ -19,7 +19,8 @@ public class HospitalService {
 	
 	//page로 db 가져올 범위 정하기
 	public List<HospitalDTO> getList(PageCriteriaDTO cri) {
-		List<HospitalDTO> list = hospitalRepository.getList(cri);
+		System.out.println(cri);
+		List<HospitalDTO> list = hospitalRepository.getKeyWoardList(cri);
 		return list;
 	}
 
@@ -28,8 +29,8 @@ public class HospitalService {
 		return hospital;
 	}
 
-	public int getTotal(int type, String location) {
-		int getTotal = hospitalRepository.getTotal(type, location);
+	public int getTotal(PageCriteriaDTO cri) {
+		int getTotal = hospitalRepository.getTotal(cri);
 		return getTotal;
 	}
 
