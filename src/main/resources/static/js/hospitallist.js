@@ -27,4 +27,20 @@ $(document).ready(function(){
 	});
 	
 	
+	//병원 검색 기능
+	let searchForm = $("#searchForm");
+	
+	$("#keyword_search").on("click",function(e){
+		e.preventDefault();
+		let pageTag = searchForm.find("input[name='page']").clone();
+		searchForm.empty();
+		
+		$("#keyword").val()
+		
+		searchForm.append(pageTag);
+		searchForm.append("<input type='hidden' name='keyword' value='" + $("#keyword").val() + "'>");
+		searchForm.attr("action","/hospi/getlist").submit();
+	});
+	
+	
 });

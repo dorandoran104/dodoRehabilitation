@@ -3,14 +3,14 @@
 <mapper namespace="com.example.demo.repository.HospitalRepository">
 	<sql id="criteria">
 		<trim prefix="where" prefixOverrides="and">
-			<if test='type != null'>
-				and dutydivnam = #{type,jdbcType=INTEGER}
+			<if test='type != null and type !="" '>
+				and dutydivnam = #{type}
 			</if>
-			<if test='keyword != null'>
+			<if test='keyword != null and keyword !=""'>
 				and dutyname like '%'||#{keyword}||'%'
 			</if>
-			<if test='location != null'>
-				and dutyaddr like '%'||#{location,jdbcType=VARCHAR}||'%'
+			<if test='location != null and location != "" '>
+				and dutyaddr like '%'||#{location}||'%'
 			</if>
 		</trim>
 	</sql>

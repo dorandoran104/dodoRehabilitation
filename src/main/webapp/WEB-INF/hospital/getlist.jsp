@@ -13,7 +13,7 @@ String[] loc = { "강남구", "강동구", "강북구", "강서구", "관악구"
 
 	<div style="width: 90%; margin: 0 auto;">
 	
-		<form action="/hospi/getlist" class="pt-3 d-flex">
+		<form id="searchForm" action="/hospi/getlist" class="pt-3 d-flex">
 			<div class="d-flex w-50">
 				<input type="hidden" name="page" value="1" /> 
 				<select name="type" id="type" class="form-select">
@@ -44,7 +44,12 @@ String[] loc = { "강남구", "강동구", "강북구", "강서구", "관악구"
 			</div>
 			<input type="submit" value="병원찾기" class="btn btn-dark btn-sm" />
 		</form>
-	
+		
+		<!--  검색 창 시작 -->
+		<div class="mt-3 d-flex">
+		  <input id="keyword" type="text" class="form-control" style="width:40%">
+		  <a id="keyword_search" href="button" class="btn btn-dark">검색</a>
+		</div>
 
 		<!-- 병원 리스트 -->
 		<table class="table mt-3 align-middle table-hover" style="width : 100%">
@@ -96,6 +101,7 @@ String[] loc = { "강남구", "강동구", "강북구", "강서구", "관악구"
 			<input type="hidden" name="page" value="${pageCri.cri.page}"/>
 			<input type="hidden" name="location" value="${pageCri.cri.location }" />
 			<input type="hidden" name="type" value="${pageCri.cri.type}" />
+			<input type="hidden" name="keyword" value="${pageCri.cri.keyword}" />
 		</form>
 	</div>
 </div>

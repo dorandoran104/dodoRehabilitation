@@ -50,13 +50,14 @@ public class UserHospitalController {
 	}
 	//병원 상세 조회
 	@GetMapping("/gethospital")
-	public String getHospital(Model model, String hpid, PageCriteriaDTO cri) throws UnsupportedEncodingException {
+	public String getHospital(Model model, String hpid, PageCriteriaDTO cri) {
 		HospitalDTO hospital = hospitalService.getHospital(hpid);
 		List<CommentDTO> comment = commentService.getComments(hpid);
+		
 		model.addAttribute("hospital",hospital);
 		model.addAttribute("comment",comment);
 		model.addAttribute("cri",cri);
-		
+		System.out.println(cri);
 		String kakaoApi = new Apikey().getKakao();
 		model.addAttribute("api",kakaoApi);
 		

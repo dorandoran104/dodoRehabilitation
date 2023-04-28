@@ -13,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.xml.sax.SAXException;
 
 import com.example.demo.dto.AdminBoardDTO;
+import com.example.demo.dto.PageCriteriaDTO;
 import com.example.demo.service.AdminBoardService;
 import com.example.demo.service.MemberService;
 
@@ -42,20 +44,19 @@ public class AdminBoardController {
 	}
 	
 	@PostMapping("/abWrite")
-	public String adWriteAction(HttpServletRequest request, HttpSession session,String hpid, String body, String type) {
+	public String adWriteAction(HttpSession session,String hpid, String body,@RequestParam("type_info") String type,PageCriteriaDTO cri) {
 		int id = (int)session.getAttribute("loginUser");
 		String writer = memberService.getNickname(id);
-				
 		AdminBoardDTO adminBoardDTO = new AdminBoardDTO();
-		adminBoardDTO.setHpid(hpid);
-		adminBoardDTO.setBody(body);
+		
 		adminBoardDTO.setWriter(writer);
+		adminBoardDTO.setBody(body);
+		adminBoardDTO.setHpid(hpid);
 		adminBoardDTO.setType(type);
 		
-		String url = request.getHeader("referer");
 		adminBoardService.writeAction(adminBoardDTO);
-		
-		return "redirect:"+url;
+		String uri = cri.uriLink() + "&hpid="+adminBoardDTO.getHpid();
+		return "redirect:/hospi/gethospital"+ uri;
 	}
 	
 	@GetMapping("/boardlist")

@@ -19,7 +19,6 @@ public class HospitalService {
 	
 	//page로 db 가져올 범위 정하기
 	public List<HospitalDTO> getList(PageCriteriaDTO cri) {
-		System.out.println(cri);
 		List<HospitalDTO> list = hospitalRepository.getKeyWoardList(cri);
 		return list;
 	}

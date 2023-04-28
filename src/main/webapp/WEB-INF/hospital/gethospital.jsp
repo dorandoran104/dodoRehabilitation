@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button class="btn btn-outline-secondary" onclick="location.href = '/hospi/getlist?page=${cri.page}&type=${cri.type}&location=${cri.location}'">병원목록</button>
+						<button id="backList" class="btn btn-outline-secondary">병원목록</button>
 						<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">정보 수정요청</button>
 					</td>
 				</tr>
@@ -75,11 +75,17 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form action="/admin/abWrite" method="post">
+						<form id="hospitalForm" action="/admin/abWrite" method="post">
 							<input type="hidden" name="hpid" value="${hospital.hpid}"/>
+							
+							<input type="hidden" name="page" value="${cri.page}" />
+							<input type="hidden" name="type" value="${cri.type}" />
+							<input type="hidden" name="location" value="${cri.location}" />
+							<input type="hidden" name="keyword" value="${cri.keyword}" />
+							
 							<div class="mb-3">
 								<label for="recipient-name" class="col-form-label">항목:</label>
-								<select name="type" id="recipient-name" class="form-control">
+								<select name="type_info" id="recipient-name" class="form-control">
 									<option value="병원명">병원명</option>
 									<option value="주소">주소</option>
 									<option value="진료시간">진료시간</option>
@@ -193,6 +199,8 @@
 	}
 </script>
 
+
+<script src="/js/hospital.js"></script>
 <script src="/js/comment.js"></script>
 <script src="/js/map.js"></script>
 
