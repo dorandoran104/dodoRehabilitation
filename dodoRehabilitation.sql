@@ -117,8 +117,6 @@ FROM
             dutyaddr
         FROM
             hospitallist
-        WHERE
-            dutyaddr LIKE '%°­³²±¸%'
     )
 WHERE
     r BETWEEN 15 AND 30;

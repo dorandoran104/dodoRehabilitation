@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.CommentRepository">
+	
 	<select id="getComments" resultType="hashmap">
-		select * from commentboard where hpid = #{hpid} order by id desc
+		select 
+			id
+			,userid
+			,hpid
+			,body
+			,to_char(writedate,'YYYY-MM-DD HH24:MI:SS') as writeDate
+			, to_char(updatedate,'YYYY-MM-DD HH24:MI:SS') as updateDate
+			,nickname
+		from commentboard where hpid = #{hpid} order by id desc
 	</select>
 
 	<insert id="insertComment" parameterType="com.example.demo.dto.CommentDTO">

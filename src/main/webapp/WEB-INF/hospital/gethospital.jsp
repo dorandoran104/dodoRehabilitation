@@ -122,7 +122,7 @@
 			</div>
 			
 			<form id="commentForm" action="/comm/dowrite" method="post">
-				<input type="hidden" name="hpid" value="${hospital.hpid}" /> 
+				<input id="hpid" type="hidden" name="hpid" value="${hospital.hpid}" /> 
 				
 				<input type="hidden" name="page" value="${page}" /> 
 				<input type="hidden" name="type" value="${type}" />
@@ -139,53 +139,11 @@
 			</form>
 		</div>
 		
-		<div>
-			<table class="table w-100 align-middle">
-				
-				<c:forEach var="comments" items="${comment}" varStatus="status">
-					<tr style="background-color: ${status.index % 2 ==0 ? 'rgba(255,255,255,0.7)':''}">
-						
-						<td style="width: 10%;">${comments.NICKNAME}</td>
-						<td style="width: 60%;">${comments.BODY}</td>
-
-						<c:choose>
-							<c:when test="${comments.USERID == sessionScope.loginUser}">
-								<td style="width: 20%;">
-									<fmt:formatDate value="${comments.UPDATEDATE}" type="both" />
-								</td>
-								<td style="width: 5%">
-									<a href="${comments.ID}" class="btn btn-outline-secondary btn-sm c_modify" data-body="${comments.BODY}" data-index="${status.index}">수정</a></td>
-								<td style="width: 5%">
-									<a href="${comments.ID}" class="btn btn-outline-secondary btn-sm c_delete" >삭제</a>
-								</td>
-							</c:when>
-							<c:otherwise>
-								<td colspan="3" style="width: 20%;">
-									<fmt:formatDate value="${comments.UPDATEDATE}" type="both" />
-								</td>
-							</c:otherwise>
-						</c:choose>
-					</tr>
-					<!-- commemt 수정시 나타날 공간 -->
-					<tr class="modifyArea" style="display:none;">
-						<td class="modifyTd" colspan="5">
-							<div class="d-flex align-items-center">
-								<textarea class="form-control modify_comm" data-index="${status.index}" rows="5">${comments.BODY}</textarea>
-								<div>
-									<a href="${comments.ID}" data-index="${status.index}" class="btn btn-outline-secondary modify_comm_submit">수정</a>
-									<a type="button" class="btn btn-outline-secondary modify_comm_end">취소</a>
-								</div>
-							</div>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
+		<div id="comment_table">
+			
 		</div>
 	</div>
 </div>
-
-
-
 
 
 <script>

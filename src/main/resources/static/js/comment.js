@@ -1,51 +1,35 @@
-/**
- * 
- */
-
 $(document).ready(function() {
-	//댓글 삭제	
-	let commentForm = $("#commentForm");
+	let hpid = $("#hpid").val();
+	console.log(hpid);
 
-	$(".c_delete").on("click", function(e) {
-		if(confirm('삭제하시겠습니까')){
-		e.preventDefault();
-		commentForm.attr("action", "/comm/dodelete").attr("method", "get");
-		commentForm.empty();
-		commentForm.append("<input type='hidden' name='id' value='" + $(this).attr("href") + "'>'");
-		commentForm.submit();
+	$.ajax({
+		url: "/comments/" + hpid,
+		type: "GET",
+		dataType: "json",
+		success: function(data) {
+			resultHTML(data)
+		},
+		error: function() {
+			console.log("실패");
 		}
-		return false;
-	});
-	
-	
-	//댓글 수정시 숨겨진 textarea창 불러오기
-	$(".c_modify").on("click", function(e) {
-		e.preventDefault();
-		
-		let index = $(this).attr("data-index");
-		$(".modifyArea").eq(index).css("display", "table-row");
-
-	});
-	
-	//댓글 수정 취소버튼 누를시 display none
-	$(".modify_comm_end").on("click", function() {
-		$(".modifyArea").eq(index).css("display", "none");
-
-	});
-	
-	//수정 버튼 누를시 댓글 수정
-	$(".modify_comm_submit").on("click",function(e){
-		e.preventDefault();
-		
-		let index = $(this).attr('data-index');
-		
-		commentForm.attr("action","/comm/domodify");
-		commentForm.empty();
-		
-		commentForm.append("<input type='hidden' name='body' value='"+  $(".modify_comm").eq(index).val() + "'>");
-		commentForm.append("<input type='hidden' name='id' value='" + $(this).attr("href") + "'>");
-		
-		commentForm.submit();
 	});
 });
 
+function resultHTML(data) {
+	$("#comment_table").empty();
+
+
+	let html = '<table class="table w-100 align-middle ">';
+
+	$.each(data, function(key, value) {
+		html += "<tr>";
+		html += "<td>" + value.NICKNAME + "</td>";
+		html += "<td>" + value.BODY + "</td>";
+		html += "<td>" + value.WRITEDATE + "</td>";
+		html += "<tr>";
+
+	});
+	html += '</table>';
+
+	$("#comment_table").append(html);
+}
