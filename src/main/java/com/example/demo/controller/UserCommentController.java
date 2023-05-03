@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -62,6 +64,20 @@ public class UserCommentController {
 		
 		List<CommentDTO> list = commentService.getComments(hpid);
 		ResponseEntity<List<CommentDTO>> entity = new ResponseEntity<List<CommentDTO>>(commentService.getComments(hpid), HttpStatus.OK);
+		return entity; 
+	}
+	
+	@PutMapping(
+			value = "/{id}",
+			produces = {MediaType.TEXT_PLAIN_VALUE}
+			)
+	public ResponseEntity<String> modifyComment(@PathVariable("id") int id, @RequestBody CommentDTO commentDTO){
+		commentService.doModify(commentDTO);
+		
+		
+		ResponseEntity<String> entity = new ResponseEntity<String>("success",HttpStatus.OK);
+		
 		return entity;
 	}
+	
 }

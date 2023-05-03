@@ -38,6 +38,8 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.1'
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.14.1'
+	//웹 소켓
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	
 	
 	
