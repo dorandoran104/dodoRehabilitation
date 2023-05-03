@@ -42,5 +42,4 @@ $(document).ready(function(){
 		searchForm.attr("action","/hospi/getlist").submit();
 	});
 	
-	
 });

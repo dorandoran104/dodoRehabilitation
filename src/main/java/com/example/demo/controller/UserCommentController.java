@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,16 +68,23 @@ public class UserCommentController {
 		return entity; 
 	}
 	
-	@PutMapping(
-			value = "/{id}",
-			produces = {MediaType.TEXT_PLAIN_VALUE}
+	@PostMapping(
+			value = "/new",
+			consumes = "application/json",
+			produces = {MediaType.APPLICATION_JSON_VALUE}
 			)
-	public ResponseEntity<String> modifyComment(@PathVariable("id") int id, @RequestBody CommentDTO commentDTO){
-		commentService.doModify(commentDTO);
+	public ResponseEntity<CommentDTO> writeComment(@RequestBody CommentDTO commentDTO){
 		
+		int result = commentService.doWrite(commentDTO);
 		
-		ResponseEntity<String> entity = new ResponseEntity<String>("success",HttpStatus.OK);
+		ResponseEntity<CommentDTO> entity;
 		
+		commentDTO = commentService.getComment(commentService.getLastId());
+		if(result == 1) {
+			entity = new ResponseEntity<CommentDTO>(commentDTO,HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		return entity;
 	}
 	

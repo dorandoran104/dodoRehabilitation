@@ -2,24 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.CommentRepository">
 	
-	<select id="getComments" resultType="hashmap">
+	<select id="getComments" resultType="com.example.demo.dto.CommentDTO">
 		select 
-			id
-			,userid
-			,hpid
-			,body
-			,to_char(writedate,'YYYY-MM-DD HH24:MI:SS') as writeDate
-			, to_char(updatedate,'YYYY-MM-DD HH24:MI:SS') as updateDate
-			,nickname
-		from commentboard where hpid = #{hpid} order by id desc
+			c.id
+			,c.userid
+			,c.hpid
+			,c.body
+			,to_char(c.writedate,'YYYY-MM-DD HH24:MI:SS') as writeDate
+			,to_char(c.updatedate,'YYYY-MM-DD HH24:MI:SS') as updateDate
+			,m.nickname as nickname
+		from 
+			commentboard c inner join member m on(c.userid = m.id)  
+		where 
+			c.hpid = #{hpid}
 	</select>
 
 	<insert id="insertComment" parameterType="com.example.demo.dto.CommentDTO">
-		insert into commentboard(id, hpid, body, nickname,userid)
+		insert into commentboard(id, hpid, body ,userid)
 		values(comm_id_seq.nextval,
 				#{hpid},
 				#{body},
-				#{nickname},
 				#{userid}
 				)
 	</insert>
@@ -35,4 +37,24 @@
 		delete commentboard
 		where id = #{id}
 	</delete>
+	
+	<select id="getLastId" resultType="int">
+		select comm_id_seq.currval
+		from dual
+	</select>
+	
+	<select id="getComment" resultType="com.example.demo.dto.CommentDTO">
+		select
+			c.id
+			,c.userid
+			,c.hpid
+			,c.body
+			,to_char(c.writedate,'YYYY-MM-DD HH24:MI:SS') as writeDate
+			,to_char(c.updatedate,'YYYY-MM-DD HH24:MI:SS') as updateDate
+			,m.nickname as nickname
+		from 
+			commentboard c inner join member m on(c.userid = m.id) 
+		where c.id = #{lastId}
+	</select>
+	
 </mapper>

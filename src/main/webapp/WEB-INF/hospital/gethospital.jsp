@@ -7,7 +7,7 @@
 <script type="text/javascript" src="${api}"></script>
 
 <%@ include file="../common/header.jspf"%>
-
+<input type="hidden" name="session" value="${loginUser}" id="loginUser"/>
 <div class="container pt-3">
 	<div class="row">
 		<div class="col-md-12">
@@ -117,7 +117,7 @@
 			<div class="d-flex">
 				<h4>병원 장터</h4>
 				<h6>
-					<span class="badge bg-secondary ms-2">${comment.size()}</span>
+					<span class="badge bg-secondary ms-2" id="comment_size">${comment.size()}</span>
 				</h6>
 			</div>
 			
@@ -129,33 +129,17 @@
 				<input type="hidden" name="location" value="${location}" />
 				
 				<div class="form-floating d-flex">
-					<textarea class="form-control" placeholder="comment" name="body"
-						id="floatingTextarea2" style="height: 100px"
-						onclick="login_Check()" maxlength="350"></textarea>
-					
-					<input type="submit" onclick="login_Check()" value="작성"
-						id="comment_submit" class="btn btn-outline-secondary" />
+					<textarea class="form-control" placeholder="comment" name="body" id="floatingTextarea2" style="height: 100px" maxlength="350"></textarea>
+					<input type="submit" value="작성" id="comment_submit" class="btn btn-outline-secondary" />
 				</div>
 			</form>
 		</div>
 		
-		<div id="comment_table">
+		<table class="table w-100 align-middle" id="comment_table">
 			
-		</div>
+		</table>
 	</div>
 </div>
-
-
-<script>
-	function login_Check() {
-		if (
-<%=session.getAttribute("loginUser")%>
-	== null) {
-			alert('로그인이 필요합니다.');
-			document.getElementById('comment_submit').disabled = true;
-		}
-	}
-</script>
 
 
 <script src="/js/hospital.js"></script>

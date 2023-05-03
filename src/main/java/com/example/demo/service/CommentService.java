@@ -21,8 +21,10 @@ public class CommentService {
 		return list;
 	}
 
-	public void doWrite(CommentDTO comment) {
-		commentRepository.insertComment(comment);
+	public int doWrite(CommentDTO comment) {
+		int result = commentRepository.insertComment(comment);
+		
+		return result;
 	}
 
 	public void doModify(CommentDTO comment) {
@@ -33,5 +35,14 @@ public class CommentService {
 		commentRepository.doDelete(id);
 	}
 
+	public int getLastId() {
+		int result = commentRepository.getLastId();
+		return result;
+	}
 
+	public CommentDTO getComment(int lastId) {
+		CommentDTO commentDTO = commentRepository.getComment(lastId);
+		return commentDTO;
+	}
+	
 }

@@ -25,12 +25,15 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @RequestMapping("/admin")
-@AllArgsConstructor
 public class AdminBoardController {
-	
-	
 	private AdminBoardService adminBoardService;
 	private MemberService memberService;
+	
+	public AdminBoardController(AdminBoardService adminBoardService, MemberService memberService) {
+		this.adminBoardService  = adminBoardService;
+		this.memberService = memberService;
+	}
+	
 	
 	@GetMapping("/updateForm")
 	public String dbUpdate() {

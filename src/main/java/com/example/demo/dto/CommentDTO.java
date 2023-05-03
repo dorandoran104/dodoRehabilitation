@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentDTO {
+	
 	private int id;
 	private int userid;
 	private String hpid;

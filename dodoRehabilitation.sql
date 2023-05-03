@@ -38,7 +38,6 @@ CREATE TABLE commentboard (
     body       VARCHAR2(400) NOT NULL,
     writedate  DATE DEFAULT sysdate,
     updatedate DATE DEFAULT sysdate,
-    nickname   VARCHAR(10) NOT NULL,
     userid     NUMBER(10) NOT NULL
 );
 

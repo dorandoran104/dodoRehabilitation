@@ -11,10 +11,14 @@ public interface CommentRepository {
 
 	List<CommentDTO> getComments(String hpid);
 
-	void insertComment(CommentDTO comment);
+	int insertComment(CommentDTO comment);
 
 	void doModify(CommentDTO comment);
 
 	void doDelete(int id);
+
+	int getLastId();
+
+	CommentDTO getComment(int lastId);
 
 }
