@@ -22,6 +22,7 @@ $(document).ready(function(){
 	$(".hpid").on("click",function(e){
 		e.preventDefault();
 		hospital_list.attr("action","/hospi/gethospital");
+		hospital_list.find("input[name='hpid']").remove();
 		hospital_list.append("<input type='hidden' name='hpid' value=" + $(this).attr("href")+">");
 		hospital_list.submit();
 	});

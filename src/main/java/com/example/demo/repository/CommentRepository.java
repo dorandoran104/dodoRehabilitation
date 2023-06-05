@@ -13,12 +13,12 @@ public interface CommentRepository {
 
 	int insertComment(CommentDTO comment);
 
-	void doModify(CommentDTO comment);
-
-	void doDelete(int id);
-
 	int getLastId();
 
 	CommentDTO getComment(int lastId);
+
+	int deleteComment(int id);
+
+	int modifyComment(CommentDTO commentDTO);
 
 }

@@ -12,7 +12,7 @@
 			,to_char(c.updatedate,'YYYY-MM-DD HH24:MI:SS') as updateDate
 			,m.nickname as nickname
 		from 
-			commentboard c inner join member m on(c.userid = m.id)  
+			commentboard c inner join dore_member m on(c.userid = m.id)  
 		where 
 			c.hpid = #{hpid}
 	</select>
@@ -26,17 +26,6 @@
 				)
 	</insert>
 	
-	<update id="doModify">
-		update commentboard
-		set body = #{body},
-		updatedate = sysdate
-		where id = #{id}
-	</update>
-	
-	<delete id="doDelete">
-		delete commentboard
-		where id = #{id}
-	</delete>
 	
 	<select id="getLastId" resultType="int">
 		select comm_id_seq.currval
@@ -53,8 +42,20 @@
 			,to_char(c.updatedate,'YYYY-MM-DD HH24:MI:SS') as updateDate
 			,m.nickname as nickname
 		from 
-			commentboard c inner join member m on(c.userid = m.id) 
+			commentboard c inner join dore_member m on(c.userid = m.id) 
 		where c.id = #{lastId}
 	</select>
+	
+	<delete id="deleteComment">
+		delete commentboard
+		where id = #{id}
+	</delete>
+	
+	<update id="modifyComment">
+		update commentboard
+		set body = #{body}
+		,updatedate = sysdate
+		where id = #{id}
+	</update>
 	
 </mapper>

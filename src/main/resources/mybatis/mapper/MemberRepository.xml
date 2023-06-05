@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.MemberRepository">
 	<insert id="doJoin" parameterType="com.example.demo.dto.MemberDTO">
-		insert into member(id,nickname,userid,userpwd,phone,email)
+		insert into dore_member(id,nickname,userid,userpwd,phone,email)
 		values(mem_id_seq.nextval,
 				#{nickname},
 				#{userid},
@@ -22,7 +22,7 @@
 				regdate,
 				delmember,
 				deldate
-		 from member where userid = #{userid}
+		 from dore_member where userid = #{userid}
 	</select>
 	
 	<select id="selectid" resultType="com.example.demo.dto.MemberDTO">
@@ -35,6 +35,6 @@
 				regdate,
 				delmember,
 				deldate
-		 from member where id = #{id}
+		 from dore_member where id = #{id}
 	</select>
 </mapper>

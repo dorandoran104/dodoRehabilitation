@@ -21,9 +21,9 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		UUID uuid = UUID.randomUUID();
-		System.out.println(uuid);
-		registry.addHandler(webSocketHandler, "/"+uuid).setAllowedOrigins("*");
+	
+	
+		registry.addHandler(webSocketHandler, "/").setAllowedOrigins("*");
 		
 	}
 
