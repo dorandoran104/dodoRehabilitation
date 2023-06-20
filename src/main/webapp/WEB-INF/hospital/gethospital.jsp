@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <c:set var="pageTitle" value="병원찾기"></c:set>
@@ -121,6 +122,7 @@
 				</h6>
 			</div>
 			
+			<sec:authorize access="isAuthenticated()">
 			<form id="commentForm" action="/comm/dowrite" method="post">
 				<input id="hpid" type="hidden" name="hpid" value="${hospital.hpid}" /> 
 				
@@ -133,6 +135,7 @@
 					<input type="submit" value="작성" id="comment_submit" class="btn btn-outline-secondary" />
 				</div>
 			</form>
+			</sec:authorize>
 		</div>
 		
 		<table class="table w-100 align-middle" id="comment_table">

@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class AdminBoardDTO {
+public class AdminBoardVO {
 	private int id;
 	private String dutyname;
 	private String body;

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.xml.sax.SAXException;
 
-import com.example.demo.dto.AdminBoardDTO;
+import com.example.demo.dto.AdminBoardVO;
 import com.example.demo.dto.PageCriteriaDTO;
 import com.example.demo.service.AdminBoardService;
 import com.example.demo.service.MemberService;
@@ -50,7 +50,7 @@ public class AdminBoardController {
 	public String adWriteAction(HttpSession session,String hpid, String body,@RequestParam("type_info") String type,PageCriteriaDTO cri) {
 		int id = (int)session.getAttribute("loginUser");
 		String writer = memberService.getNickname(id);
-		AdminBoardDTO adminBoardDTO = new AdminBoardDTO();
+		AdminBoardVO adminBoardDTO = new AdminBoardVO();
 		
 		adminBoardDTO.setWriter(writer);
 		adminBoardDTO.setBody(body);
@@ -64,7 +64,7 @@ public class AdminBoardController {
 	
 	@GetMapping("/boardlist")
 	public String getBoardList(Model model) {
-		List<AdminBoardDTO> list = adminBoardService.getBoardList();
+		List<AdminBoardVO> list = adminBoardService.getBoardList();
 		model.addAttribute("list",list);
 		return "admin/boardlist";
 	}

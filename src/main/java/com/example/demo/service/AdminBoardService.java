@@ -15,7 +15,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.example.demo.apikey.Apikey;
-import com.example.demo.dto.AdminBoardDTO;
+import com.example.demo.dto.AdminBoardVO;
 import com.example.demo.repository.AdminBoardRepository;
 
 @Service
@@ -96,12 +96,12 @@ public class AdminBoardService {
 	}
 
 	
-	public void writeAction(AdminBoardDTO adminBoardDTO) {
+	public void writeAction(AdminBoardVO adminBoardDTO) {
 		adminBoardRepository.writeAction(adminBoardDTO);
 	}
 
-	public List<AdminBoardDTO> getBoardList() {
-		List<AdminBoardDTO> list = adminBoardRepository.getBoardList();
+	public List<AdminBoardVO> getBoardList() {
+		List<AdminBoardVO> list = adminBoardRepository.getBoardList();
 		return list;
 	}
 }

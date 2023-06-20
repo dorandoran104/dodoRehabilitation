@@ -43,6 +43,8 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.14.1'
 	//웹 소켓
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	//security jsp
+	implementation 'org.springframework.security:spring-security-taglibs'
 	
 	
 	

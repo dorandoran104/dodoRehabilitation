@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.demo.dto.AdminBoardDTO;
+import com.example.demo.dto.AdminBoardVO;
 
 @Mapper
 public interface AdminBoardRepository {
@@ -55,8 +55,8 @@ public interface AdminBoardRepository {
 			@Param("dutyTime8s") String dutyTime8s, @Param("wgs84Lat") String wgs84Lat,
 			@Param("wgs84Lon") String wgs84Lon);
 
-	void writeAction(AdminBoardDTO adminBoardDTO);
+	void writeAction(AdminBoardVO adminBoardDTO);
 
-	List<AdminBoardDTO> getBoardList();
+	List<AdminBoardVO> getBoardList();
 
 }
