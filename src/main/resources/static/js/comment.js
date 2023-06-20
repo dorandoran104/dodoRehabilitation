@@ -7,13 +7,6 @@ $(document).ready(function() {
 	//댓글 불러오기
 	getList();
 	
-	//댓글 작성
-	/*
-	$("#comment_submit").on("click",function(e){
-		writeComment();
-	});*/
-	
-	
 	$("#floatingTextarea2").on("click",function(e){
 		e.preventDefault();
 		if(session == null || session == ''){

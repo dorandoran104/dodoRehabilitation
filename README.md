@@ -41,21 +41,29 @@
 #### 운영자
 * 병원 상세페이지에서 요청온 정보 수정 리스트를 볼 수 있음
 
+<details>
+ <summary>View</summary>
+ 
+ * main
+ <img src="https://github.com/dorandoran104/dodoRehabilitation/assets/117650784/dc2f9dac-5704-4d4d-9892-6605568a025c">
+ 
+ * list
+ <img src="https://github.com/dorandoran104/dodoRehabilitation/assets/117650784/12e7793e-30d1-4233-8bb6-91a314ed49e4">
+ 
+ * get
+ <img src="https://github.com/dorandoran104/dodoRehabilitation/assets/117650784/8af18ee1-1aeb-4365-874a-261a23984ed1">
+      
+</details>
 
 ## 배운점 & 부족한점
 
 #### 배운점
-* 공공데이터의 xml->java 파싱을 이번에 알 수 있었다.
-* 전반적으로 웹 사이트가 어떻게 만들어지는지 알 수 있었다.
+* 공공데이터를 사용해볼 수 있었다.
+* REST API를 댓글에 적용해보면서 어떻게 이뤄지는지 알 수 있었다.
 
 ------
 
 #### 부족한점
-* 첫 웹사이트라 디자인이 아주 무식하다.
-* 코드가 난잡하다.
-* 아직 많은게 부족하다
----
- 학원에서 배우기 전에 독학 또는 이렇게 하면 되지 않을까? 라는 걸로 코드를 짜서 모든게 난잡
-
- 천천히 수정해 가야 할듯싶다.
-
+* 학원에서 배우기 전에 이렇게 하면 되지 않을까? 라는 생각으로 코드를 짜서 다시보니 보기가 어려웠다.
+* 기본적으로 웹을 설계하지 않고 생각나는대로 코드를 짜서 다음엔 어떤 기능을 해야하지? 라는 생각이 많이 들었다. 앞으로는 설계 후 개발을 필요로 해야할 것 같다.
+----

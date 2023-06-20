@@ -25,7 +25,7 @@ create index addr_ind on hospitallist(dutyaddr);
 DROP TABLE commentboard;
 
 DROP SEQUENCE comm_id_seq;
-
+select * from commentboard;
 CREATE TABLE commentboard (
     id         NUMBER(10)
         CONSTRAINT comm_id_pk PRIMARY KEY,

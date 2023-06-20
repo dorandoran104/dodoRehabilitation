@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.MemberRepository">
-	<insert id="doJoin" parameterType="com.example.demo.dto.MemberDTO">
+	<insert id="doJoin" parameterType="com.example.demo.dto.MemberVO">
+		
+		<selectKey order="BEFORE" resultType="int" keyProperty="id">
+			select mem_id_seq.nextval from dual 
+		</selectKey>
+	
 		insert into dore_member(id,nickname,userid,userpwd,phone,email)
-		values(mem_id_seq.nextval,
+		values(#{id},
 				#{nickname},
 				#{userid},
 				#{userpwd},
@@ -12,7 +17,7 @@
 		)
 	</insert>
 	
-	<select id="selectUserid" resultType="com.example.demo.dto.MemberDTO">
+	<select id="selectUserid" resultType="com.example.demo.dto.MemberVO">
 		select id,
 				nickname,
 				userid,
@@ -25,7 +30,7 @@
 		 from dore_member where userid = #{userid}
 	</select>
 	
-	<select id="selectid" resultType="com.example.demo.dto.MemberDTO">
+	<select id="selectid" resultType="com.example.demo.dto.MemberVO">
 		select 	id,
 				nickname,
 				userid,
@@ -37,4 +42,9 @@
 				deldate
 		 from dore_member where id = #{id}
 	</select>
+	
+	<insert id="insertAuth">
+		insert into dore_member_auth(memberno, auth)
+		values(#{memberNo},#{auth})
+	</insert>
 </mapper>
