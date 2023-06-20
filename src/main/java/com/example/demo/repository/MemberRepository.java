@@ -2,14 +2,17 @@ package com.example.demo.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.AuthVO;
+import com.example.demo.dto.MemberVO;
 @Mapper
 public interface MemberRepository {
 
-	void doJoin(MemberDTO member);
+	void doJoin(MemberVO member);
 
-	MemberDTO selectUserid(String userid);
+	MemberVO selectUserid(String userid);
 	
-	MemberDTO selectid(int id);
+	MemberVO selectid(int id);
+
+	int insertAuth(AuthVO authVO);
 
 }

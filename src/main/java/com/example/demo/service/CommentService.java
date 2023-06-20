@@ -27,14 +27,6 @@ public class CommentService {
 		return result;
 	}
 
-	public void doModify(CommentDTO comment) {
-		commentRepository.doModify(comment);
-	}
-
-	public void doDelete(int id) {
-		commentRepository.doDelete(id);
-	}
-
 	public int getLastId() {
 		int result = commentRepository.getLastId();
 		return result;
@@ -43,6 +35,17 @@ public class CommentService {
 	public CommentDTO getComment(int lastId) {
 		CommentDTO commentDTO = commentRepository.getComment(lastId);
 		return commentDTO;
+	}
+
+	public int deleteComment(int id) {
+		return commentRepository.deleteComment(id);
+	}
+
+	public int modifyComment(int id, String body) {
+		CommentDTO commentDTO = new CommentDTO();
+		commentDTO.setId(id);
+		commentDTO.setBody(body);
+		return commentRepository.modifyComment(commentDTO);
 	}
 	
 }

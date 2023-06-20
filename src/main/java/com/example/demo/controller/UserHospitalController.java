@@ -56,6 +56,7 @@ public class UserHospitalController {
 		
 		model.addAttribute("hospital",hospital);
 		model.addAttribute("comment",comment);
+		
 		model.addAttribute("cri",cri);
 		System.out.println(cri);
 		String kakaoApi = new Apikey().getKakao();

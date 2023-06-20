@@ -4,6 +4,7 @@
 function check() {
 	let userpwd = document.getElementById('userpwd');
 	let check_pwd = document.getElementById('check_pwd');
+	
 	let pwd_temp = document.getElementById('pwd_temp');
 	if (userpwd.value.length == 0 || check_pwd.value.length == 0) {
 		pwd_temp.innerText = '비밀번호가 일치하지 않습니다.';

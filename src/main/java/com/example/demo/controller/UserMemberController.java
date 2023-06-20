@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.MemberVO;
 import com.example.demo.service.MemberService;
 
 @Controller
@@ -29,7 +29,7 @@ public class UserMemberController {
 	
 	@PostMapping("/dologin")
 	public String doLogin(Model model, HttpSession session, String userid, String userpwd, String url) {
-		MemberDTO member = memberService.selectUserid(userid);
+		MemberVO member = memberService.selectUserid(userid);
 		
 		if(member == null || !(member.getUserpwd().equalsIgnoreCase(userpwd) )) {
 			model.addAttribute("message","아이디 혹은 비밀번호가 틀렸습니다.");
@@ -52,8 +52,8 @@ public class UserMemberController {
 	}
 	
 	@PostMapping("/dojoin")
-	public String doJoin(String nickname, String userid, String userpwd, String phone, String email) {
-		memberService.doJoin(nickname, userid, userpwd, phone, email);
-		return "redirect:/mem/login";
+	public String doJoin(MemberVO memberVO) {
+		int result = memberService.doJoin(memberVO);
+		return "redirect:/member/login";
 	}
 }

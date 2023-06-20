@@ -6,6 +6,7 @@
 <%@ include file="../common/header.jspf"%>
 <div class="container index-container mt-5">
 	<form action="/member/dojoin" method="post" name="frm" style="width : 70%">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<div class="joinForm">
 			<div class="mb-3">
 				<label for="nickname" class="form-label">닉네임</label> <input

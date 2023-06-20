@@ -19,18 +19,13 @@ CREATE TABLE hospitallist (
     wgs84lon   VARCHAR2(25)
 );
 
-select * from user_constraints where table_name = 'HOSPITALLIST';
-
 create index addr_ind on hospitallist(dutyaddr);
 
-alter table hospitallist add unique(dutyaddr);
-
-COMMIT;
 --´ñ±Û Å×ÀÌºí+½ÃÄö½º
 DROP TABLE commentboard;
 
 DROP SEQUENCE comm_id_seq;
-
+select * from commentboard;
 CREATE TABLE commentboard (
     id         NUMBER(10)
         CONSTRAINT comm_id_pk PRIMARY KEY,
@@ -48,7 +43,7 @@ DROP TABLE member;
 
 DROP SEQUENCE mem_id_seq;
 
-CREATE TABLE member (
+CREATE TABLE dore_member (
     id        NUMBER(10)
         CONSTRAINT mem_id_pk PRIMARY KEY,
     nickname  VARCHAR2(10) NOT NULL,
@@ -98,24 +93,3 @@ CREATE TABLE adminboard (
 );
 
 CREATE SEQUENCE ad_bo_seq;
-
-SELECT
-    /*+ INDEX(hospitallist addr_ind) */
-    r,
-    hpid,
-    dutyname,
-    dutydivnam,
-    dutyaddr
-FROM
-    (
-        SELECT
-            ROWNUM r,
-            hpid,
-            dutyname,
-            dutydivnam,
-            dutyaddr
-        FROM
-            hospitallist
-    )
-WHERE
-    r BETWEEN 15 AND 30;
