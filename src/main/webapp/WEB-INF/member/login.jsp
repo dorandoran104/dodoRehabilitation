@@ -6,9 +6,11 @@
 <%@ include file="../common/header.jspf"%>
 
 <div class="container index-container">
-	<form action="/member/dologin" method="post" style="width : 70%">
+	<form action="/member/loginAction" method="post" style="width : 70%">
 		<div class="loginForm">
+			<div>${error}</div>
 			<input type="hidden" name="url" value="${url}"/>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<div class="mb-3">
 				<label for="userid" class="form-label">아이디</label> 
 				<input type="text" class="form-control" name="userid" id="userid" placeholder="아이디">

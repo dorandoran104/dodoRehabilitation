@@ -21,9 +21,13 @@ public class UserMemberController {
 	private MemberService memberService;
 	
 	@GetMapping("/login")
-	public String loginForm(HttpServletRequest request) {
+	public String loginForm(Model model, HttpServletRequest request, String error) {
 		String url = request.getHeader("referer");
 		request.setAttribute("url", url);
+		
+		if(error != null) {
+			model.addAttribute("error","Login Error -- Check Your Account");
+		}
 		return "member/login";
 	}
 	

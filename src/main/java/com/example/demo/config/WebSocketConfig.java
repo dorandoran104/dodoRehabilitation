@@ -1,7 +1,5 @@
 package com.example.demo.config;
 
-import java.util.UUID;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;

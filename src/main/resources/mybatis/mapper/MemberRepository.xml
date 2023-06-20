@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.MemberRepository">
+	
+	<resultMap type="com.example.demo.dto.MemberVO" id="memberVO">
+		<id property="id" column="id"/>
+		<result property="nickname" column="nickname"/>
+		<result property="userid" column="userid"/>
+		<result property="userpwd" column="userpwd"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="regDate" column="regdate"/>
+		<result property="delMember" column="delmember"/>
+		<result property="delDate" column="deldate"/>
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.example.demo.dto.AuthVO" id="authMap">
+		<result property="memberNo" column="memberno"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+	
+	<select id="selectUserid" resultMap="memberVO">
+		select mem.id,
+				nickname,
+				userid,
+				userpwd,
+				phone,
+				email,
+				regdate,
+				delmember,
+				deldate,
+				auth
+		 from dore_member mem left outer join dore_member_auth auth on (mem.id = auth.memberno) 
+		 
+		  where userid = #{userid}
+	</select>
+	
+	<select id="selectid" resultType="com.example.demo.dto.MemberVO">
+		select 	id,
+				nickname,
+				userid,
+				userpwd,
+				phone,
+				email,
+				regdate,
+				delmember,
+				deldate
+		 from dore_member where id = #{id}
+	</select>
+	
 	<insert id="doJoin" parameterType="com.example.demo.dto.MemberVO">
 		
 		<selectKey order="BEFORE" resultType="int" keyProperty="id">
@@ -16,32 +64,6 @@
 				#{email}
 		)
 	</insert>
-	
-	<select id="selectUserid" resultType="com.example.demo.dto.MemberVO">
-		select id,
-				nickname,
-				userid,
-				userpwd,
-				phone,
-				email,
-				regdate,
-				delmember,
-				deldate
-		 from dore_member where userid = #{userid}
-	</select>
-	
-	<select id="selectid" resultType="com.example.demo.dto.MemberVO">
-		select 	id,
-				nickname,
-				userid,
-				userpwd,
-				phone,
-				email,
-				regdate,
-				delmember,
-				deldate
-		 from dore_member where id = #{id}
-	</select>
 	
 	<insert id="insertAuth">
 		insert into dore_member_auth(memberno, auth)

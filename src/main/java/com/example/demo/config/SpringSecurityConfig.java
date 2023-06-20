@@ -1,13 +1,20 @@
 package com.example.demo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.example.demo.service.CustomUserDetailsService;
+
 @Configuration
 public class SpringSecurityConfig {
+	
 	
 	@Bean
 	public SecurityFilterChain securityFileterChan(HttpSecurity http) throws Exception{
@@ -21,7 +28,10 @@ public class SpringSecurityConfig {
 				//로그인 폼
 				.formLogin()
 					.loginPage("/member/login")
-					.defaultSuccessUrl("/")
+					.loginProcessingUrl("/member/loginAction")
+					.usernameParameter("userid")
+					.passwordParameter("userpwd")
+					.defaultSuccessUrl("/user/home")
 					.permitAll()
 				.and()
 					.logout()
@@ -33,5 +43,9 @@ public class SpringSecurityConfig {
 	public BCryptPasswordEncoder bcryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+	
+	@Bean
+	public CustomUserDetailsService customUserDetailsService() {
+		return new CustomUserDetailsService();
+	}
 }
