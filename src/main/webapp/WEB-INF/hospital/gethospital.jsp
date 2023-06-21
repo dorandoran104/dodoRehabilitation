@@ -8,7 +8,11 @@
 <script type="text/javascript" src="${api}"></script>
 
 <%@ include file="../common/header.jspf"%>
-<input type="hidden" name="session" value="${loginUser}" id="loginUser"/>
+
+<input type="hidden" id="csrfHeader" value="${_csrf.headerName }"/>
+<input type="hidden" id="csrfToken" value="${_csrf.token}" />
+<input type="hidden" id="userName" value='<sec:authentication property="name"/>' />
+
 <div class="container pt-3">
 	<div class="row">
 		<div class="col-md-12">

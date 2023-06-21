@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.apikey.Apikey;
-import com.example.demo.dto.CommentDTO;
+import com.example.demo.dto.CommentVO;
 import com.example.demo.dto.HospitalDTO;
 import com.example.demo.dto.PageCriteriaDTO;
 import com.example.demo.dto.PageDTO;
@@ -37,7 +37,7 @@ public class UserHospitalController {
 	//병원 리스트 조회
 	@GetMapping("/getlist")
 	public String getList(Model model, PageCriteriaDTO cri) {
-		System.out.println(cri);
+		
 		List<HospitalDTO> list = hospitalService.getList(cri);
 		
 		int total = hospitalService.getTotal(cri);
@@ -52,13 +52,13 @@ public class UserHospitalController {
 	@GetMapping("/gethospital")
 	public String getHospital(Model model, String hpid, PageCriteriaDTO cri) {
 		HospitalDTO hospital = hospitalService.getHospital(hpid);
-		List<CommentDTO> comment = commentService.getComments(hpid);
+		List<CommentVO> comment = commentService.getComments(hpid);
 		
 		model.addAttribute("hospital",hospital);
 		model.addAttribute("comment",comment);
 		
 		model.addAttribute("cri",cri);
-		System.out.println(cri);
+		
 		String kakaoApi = new Apikey().getKakao();
 		model.addAttribute("api",kakaoApi);
 		

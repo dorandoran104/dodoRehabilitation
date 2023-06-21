@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.CommentDTO;
+import com.example.demo.dto.CommentVO;
 import com.example.demo.repository.CommentRepository;
 
 @Service
@@ -16,12 +16,12 @@ public class CommentService {
 		this.commentRepository = commentRepository;
 	}
 
-	public List<CommentDTO> getComments(String hpid) {
-		List<CommentDTO> list = commentRepository.getComments(hpid);
+	public List<CommentVO> getComments(String hpid) {
+		List<CommentVO> list = commentRepository.getComments(hpid);
 		return list;
 	}
 
-	public int doWrite(CommentDTO comment) {
+	public int doWrite(CommentVO comment) {
 		int result = commentRepository.insertComment(comment);
 		
 		return result;
@@ -32,8 +32,8 @@ public class CommentService {
 		return result;
 	}
 
-	public CommentDTO getComment(int lastId) {
-		CommentDTO commentDTO = commentRepository.getComment(lastId);
+	public CommentVO getComment(int lastId) {
+		CommentVO commentDTO = commentRepository.getComment(lastId);
 		return commentDTO;
 	}
 
@@ -42,7 +42,7 @@ public class CommentService {
 	}
 
 	public int modifyComment(int id, String body) {
-		CommentDTO commentDTO = new CommentDTO();
+		CommentVO commentDTO = new CommentVO();
 		commentDTO.setId(id);
 		commentDTO.setBody(body);
 		return commentRepository.modifyComment(commentDTO);

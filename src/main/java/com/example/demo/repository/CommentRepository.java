@@ -5,20 +5,20 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.demo.dto.CommentDTO;
+import com.example.demo.dto.CommentVO;
 @Mapper
 public interface CommentRepository {
 
-	List<CommentDTO> getComments(String hpid);
+	List<CommentVO> getComments(String hpid);
 
-	int insertComment(CommentDTO comment);
+	int insertComment(CommentVO comment);
 
 	int getLastId();
 
-	CommentDTO getComment(int lastId);
+	CommentVO getComment(int lastId);
 
 	int deleteComment(int id);
 
-	int modifyComment(CommentDTO commentDTO);
+	int modifyComment(CommentVO commentDTO);
 
 }

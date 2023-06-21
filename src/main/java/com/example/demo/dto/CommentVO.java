@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDTO {
+public class CommentVO {
 	
 	private int id;
-	private int userid;
+	private String userid;
 	private String hpid;
 	private String body;
 	private String writeDate;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.CommentRepository">
 	
-	<select id="getComments" resultType="com.example.demo.dto.CommentDTO">
+	<select id="getComments" resultType="com.example.demo.dto.CommentVO">
 		select 
 			c.id
 			,c.userid
@@ -17,12 +17,19 @@
 			c.hpid = #{hpid}
 	</select>
 
-	<insert id="insertComment" parameterType="com.example.demo.dto.CommentDTO">
+	<insert id="insertComment" parameterType="com.example.demo.dto.CommentVO">
+	
+		<selectKey resultType="int" keyProperty="id" order="BEFORE">
+			select id
+			from dore_member
+			where userid = #{userid}
+		</selectKey>
+		
 		insert into commentboard(id, hpid, body ,userid)
 		values(comm_id_seq.nextval,
 				#{hpid},
 				#{body},
-				#{userid}
+				#{id}
 				)
 	</insert>
 	
@@ -32,7 +39,7 @@
 		from dual
 	</select>
 	
-	<select id="getComment" resultType="com.example.demo.dto.CommentDTO">
+	<select id="getComment" resultType="com.example.demo.dto.CommentVO">
 		select
 			c.id
 			,c.userid

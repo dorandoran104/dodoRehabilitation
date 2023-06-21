@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.CommentDTO;
+import com.example.demo.dto.CommentVO;
 import com.example.demo.service.CommentService;
 import com.example.demo.service.MemberService;
 
@@ -36,9 +36,9 @@ public class UserCommentController {
 			value = "/{hpid}",
 			produces = {MediaType.APPLICATION_JSON_VALUE}
 			)
-	public ResponseEntity<List<CommentDTO>> getComment(@PathVariable("hpid") String hpid){
+	public ResponseEntity<List<CommentVO>> getComment(@PathVariable("hpid") String hpid){
 		
-		List<CommentDTO> list = commentService.getComments(hpid);
+		List<CommentVO> list = commentService.getComments(hpid);
 		
 		return new ResponseEntity<>(list, HttpStatus.OK); 
 	}
@@ -48,11 +48,9 @@ public class UserCommentController {
 			consumes = "application/json"
 			)
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<String> writeComment(@RequestBody CommentDTO commentDTO){
+	public ResponseEntity<String> writeComment(@RequestBody CommentVO commentDTO){
 		
 		int result = commentService.doWrite(commentDTO);
-		System.out.println("comment : " + commentDTO);
-		System.out.println("result : " + result);
 		return result > 0 ? new ResponseEntity<>("success",HttpStatus.OK) : new ResponseEntity<>("ERROR",HttpStatus.BAD_REQUEST);
 	}
 	
