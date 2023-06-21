@@ -31,7 +31,7 @@ public class MemberService {
 		AuthVO authVO = new AuthVO();
 		
 		authVO.setAuth("ROLE_MEMBER");
-		authVO.setMemberNo(memberVO.getId());
+		authVO.setMemberid(memberVO.getUserid());
 		
 		return memberRepository.insertAuth(authVO);
 	}

@@ -31,17 +31,17 @@ public class UserMemberController {
 		return "member/login";
 	}
 	
-	@PostMapping("/dologin")
-	public String doLogin(Model model, HttpSession session, String userid, String userpwd, String url) {
-		MemberVO member = memberService.selectUserid(userid);
-		
-		if(member == null || !(member.getUserpwd().equalsIgnoreCase(userpwd) )) {
-			model.addAttribute("message","아이디 혹은 비밀번호가 틀렸습니다.");
-			return "member/login";
-		}
-		session.setAttribute("loginUser", member.getId());
-		return "redirect:"+url;
-	}
+//	@PostMapping("/dologin")
+//	public String doLogin(Model model, HttpSession session, String userid, String userpwd, String url) {
+//		MemberVO member = memberService.selectUserid(userid);
+//		
+//		if(member == null || !(member.getUserpwd().equalsIgnoreCase(userpwd) )) {
+//			model.addAttribute("message","아이디 혹은 비밀번호가 틀렸습니다.");
+//			return "member/login";
+//		}
+//		
+//		return "redirect:"+url;
+//	}
 	
 	@GetMapping("/dologout")
 	public String doLogout(HttpSession session, HttpServletRequest request) {

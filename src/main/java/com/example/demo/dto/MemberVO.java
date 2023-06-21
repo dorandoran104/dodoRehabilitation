@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class MemberVO {
-	private int id;
 	private String nickname;
 	private String userid;
 	private String userpwd;

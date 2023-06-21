@@ -81,7 +81,7 @@
 					</div>
 					<div class="modal-body">
 						<form id="hospitalForm" action="/admin/abWrite" method="post">
-							<input type="hidden" name="hpid" value="${hospital.hpid}"/>
+							<input id="hpid" type="hidden" name="hpid" value="${hospital.hpid}"/>
 							
 							<input type="hidden" name="page" value="${cri.page}" />
 							<input type="hidden" name="type" value="${cri.type}" />
@@ -128,7 +128,7 @@
 			
 			<sec:authorize access="isAuthenticated()">
 			<form id="commentForm" action="/comm/dowrite" method="post">
-				<input id="hpid" type="hidden" name="hpid" value="${hospital.hpid}" /> 
+				<input type="hidden" name="hpid" value="${hospital.hpid}" /> 
 				
 				<input type="hidden" name="page" value="${page}" /> 
 				<input type="hidden" name="type" value="${type}" />

@@ -23,7 +23,6 @@ public class CommentService {
 
 	public int doWrite(CommentVO comment) {
 		int result = commentRepository.insertComment(comment);
-		
 		return result;
 	}
 

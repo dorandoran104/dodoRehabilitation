@@ -1,9 +1,10 @@
 let commnets = '';
 
 $(document).ready(function() {
-	
+
 	let csrfHeader = document.querySelector("#csrfHeader").value;
 	let csrfToken = document.querySelector("#csrfToken").value;
+	let userName = document.querySelector("#userName").value;
 
 	$.ajaxSetup({
 		beforeSend: function(xhr, settings) {
@@ -14,7 +15,7 @@ $(document).ready(function() {
 	});
 
 	let hpid = $("#hpid").val();
-	let session = $("#loginUser").val();
+	console.log(hpid);
 
 	//댓글 불러오기
 	getList();
@@ -28,12 +29,10 @@ $(document).ready(function() {
 	//댓글 작성하기
 	function writeComment() {
 		let param = {
-			hpid: $("#hpid").val(),
+			hpid: hpid,
 			body: $("#floatingTextarea2").val(),
-			userid: $("#userName").val()
+			userid: userName
 		}
-		console.log(JSON.stringify(param));
-
 		$.ajax({
 			url: "/comments/new",
 			type: "POST",
@@ -49,111 +48,103 @@ $(document).ready(function() {
 				}
 			},
 			error: function(e) {
-				console.log(e);
-				alert('오aa세요');
+				alert('error');
 			}
 		});
-		
 	}
-	
-	function getList() {
-	$.ajax({
-		url: "/comments/" + $("#hpid").val(),
-		type: "GET",
-		dataType: "json",
-		success: function(data) {
-			console.log(data);
-			resultHTML(data)
-		},
-		error: function() {
-			console.log("실패");
+
+	//댓글 삭제하기
+	$(document).on("click", ".comment_delete", function(e) {
+		e.preventDefault();
+
+		if (userName != $(this).data("us")) {
+			alert("권한이 없습니다.");
+			return false;
+		}
+
+		if (confirm('삭제하시겠습니까?')) {
+			let id = $(this).attr("href");
+			console.log(id);
+
+			$.ajax({
+				url: "/comments/" + id,
+				type: 'delete',
+				success: function() {
+					getList();
+
+					if ($.isNumeric($("#comment_size").text())) {
+						let num = parseInt($("#comment_size").text()) - 1;
+						$("#comment_size").text(num);
+					}
+				},
+				error: function() {
+					alert('오류 : 잠시후에 다시 시도해주세요');
+				}
+			});
 		}
 	});
-}
 
-});
-
-
-//지우기 클릭시
-$(document).on("click", ".comment_delete", function(e) {
-	e.preventDefault();
-	if ($("#loginUser").val() != $(this).data("us")) {
-		alert("권한이 없습니다.");
-		return false;
-	}
-
-	if (confirm('삭제하시겠습니까?')) {
-		let id = $(this).attr("href");
-		console.log(id);
+	function getList() {
 		$.ajax({
-			url: "/comments/" + id,
-			type: 'delete',
-			success: function() {
-				getList();
-
-				if ($.isNumeric($("#comment_size").text())) {
-					let num = parseInt($("#comment_size").text()) - 1;
-					$("#comment_size").text(num);
-				}
+			url: "/comments/" + hpid,
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				console.log(data);
+				resultHTML(data)
 			},
 			error: function() {
-				alert('오류 : 잠시후에 다시 시도해주세요');
+				console.log("실패");
 			}
 		});
 	}
-});
+	
+	//수정하기 누를때
+	$(document).on("click", ".comment_modify", function(e) {
+		e.preventDefault();
 
-//수정 누를시
-$(document).on("click", ".comment_modify", function(e) {
-	e.preventDefault();
-
-	if ($("#loginUser").val() != $(this).data("us")) {
-		alert("권한이 없습니다.");
-		return false;
-	}
-
-	commnets = $(this).closest("tr").clone();
-	let str = '';
-
-	str += '<td colspan="3"><textarea style="background-color : white;" class="form-control"name="body" id="body" >';
-	str += $(this).closest("tr").find("td[class='comment-body']").text() + '</textarea></td>';
-	str += '<td><a href="' + $(this).attr("href") + '" class="btn btn-outline-secondary btn-sm comment-modify">수정</a></td>';
-	str += '<td><a href="#" class="btn btn-outline-secondary btn-sm comment-reset">취소</a></td>';
-
-	$(this).closest("tr").html(str);
-})
-//수정 창에서 수정 누를시
-$(document).on("click", ".comment-modify", function(e) {
-	e.preventDefault();
-	let body = $(this).parents("tr").find("textarea").val();
-
-	$.ajax({
-		url: "/comments/" + $(this).attr("href"),
-		type: "put",
-		data: body,
-		contentType: "application/json; charset=utf-8",
-		success: function() {
-			getList();
-		},
-		error: function() {
-			alert('오류 잠시 후에 다시 시도해주세요');
+		if (userName != $(this).data("us")) {
+			alert("권한이 없습니다.");
+			return false;
 		}
+
+		commnets = $(this).closest("tr").clone();
+		let str = '';
+
+		str += '<td colspan="3"><textarea style="background-color : white;" class="form-control"name="body" id="body" >';
+		str += $(this).closest("tr").find("td[class='comment-body']").text() + '</textarea></td>';
+		str += '<td><a href="' + $(this).attr("href") + '" class="btn btn-outline-secondary btn-sm comment-modify">수정</a></td>';
+		str += '<td><a href="#" class="btn btn-outline-secondary btn-sm comment-reset">취소</a></td>';
+
+		$(this).closest("tr").html(str);
+	})
+	//수정 창에서 수정 누를시
+	$(document).on("click", ".comment-modify", function(e) {
+		e.preventDefault();
+		let body = $(this).parents("tr").find("textarea").val();
+
+		$.ajax({
+			url: "/comments/" + $(this).attr("href"),
+			type: "put",
+			data: body,
+			contentType: "application/json; charset=utf-8",
+			success: function() {
+				getList();
+			},
+			error: function() {
+				alert('오류 잠시 후에 다시 시도해주세요');
+			}
+		});
 	});
+
+	//수정 창에서 취소 누를시
+	$(document).on("click", ".comment-reset", function(e) {
+		e.preventDefault();
+		$(this).closest("tr").html(commnets.html());
+	});
+
+
 });
-
-//수정 창에서 취소 누를시
-$(document).on("click", ".comment-reset", function(e) {
-	e.preventDefault();
-	$(this).closest("tr").html(commnets.html());
-});
-
-//댓글 불러오기(ajax)
-
-
-
-
-
-//메소드 실행
 
 //댓글 불러오기
 function resultHTML(data) {

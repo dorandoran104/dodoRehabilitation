@@ -12,24 +12,18 @@
 			,to_char(c.updatedate,'YYYY-MM-DD HH24:MI:SS') as updateDate
 			,m.nickname as nickname
 		from 
-			commentboard c inner join dore_member m on(c.userid = m.id)  
+			commentboard c inner join dore_member m on(c.userid = m.userid)  
 		where 
 			c.hpid = #{hpid}
 	</select>
 
 	<insert id="insertComment" parameterType="com.example.demo.dto.CommentVO">
-	
-		<selectKey resultType="int" keyProperty="id" order="BEFORE">
-			select id
-			from dore_member
-			where userid = #{userid}
-		</selectKey>
 		
 		insert into commentboard(id, hpid, body ,userid)
 		values(comm_id_seq.nextval,
 				#{hpid},
 				#{body},
-				#{id}
+				#{userid}
 				)
 	</insert>
 	

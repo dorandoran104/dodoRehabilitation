@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.repository.MemberRepository">
 	
 	<resultMap type="com.example.demo.dto.MemberVO" id="memberVO">
-		<id property="id" column="id"/>
+		<id property="userid" column="userid"/>
 		<result property="nickname" column="nickname"/>
 		<result property="userid" column="userid"/>
 		<result property="userpwd" column="userpwd"/>
@@ -16,14 +16,14 @@
 	</resultMap>
 	
 	<resultMap type="com.example.demo.dto.AuthVO" id="authMap">
-		<result property="memberNo" column="memberno"/>
+		<result property="memberid" column="memberid"/>
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
 	<select id="selectUserid" resultMap="memberVO">
-		select mem.id,
+		select 
 				nickname,
-				userid,
+				mem.userid,
 				userpwd,
 				phone,
 				email,
@@ -31,13 +31,13 @@
 				delmember,
 				deldate,
 				auth
-		 from dore_member mem left outer join dore_member_auth auth on (mem.id = auth.memberno) 
+		 from dore_member mem left outer join dore_member_auth auth on (mem.userid = auth.memberid) 
 		 
 		  where userid = #{userid}
 	</select>
-	
+	<!-- 
 	<select id="selectid" resultType="com.example.demo.dto.MemberVO">
-		select 	id,
+		select 	
 				nickname,
 				userid,
 				userpwd,
@@ -48,15 +48,12 @@
 				deldate
 		 from dore_member where id = #{id}
 	</select>
+	 -->
 	
 	<insert id="doJoin" parameterType="com.example.demo.dto.MemberVO">
-		
-		<selectKey order="BEFORE" resultType="int" keyProperty="id">
-			select mem_id_seq.nextval from dual 
-		</selectKey>
 	
-		insert into dore_member(id,nickname,userid,userpwd,phone,email)
-		values(#{id},
+		insert into dore_member(nickname,userid,userpwd,phone,email)
+		values(
 				#{nickname},
 				#{userid},
 				#{userpwd},
@@ -66,7 +63,7 @@
 	</insert>
 	
 	<insert id="insertAuth">
-		insert into dore_member_auth(memberno, auth)
-		values(#{memberNo},#{auth})
+		insert into dore_member_auth(memberid, auth)
+		values(#{memberid},#{auth})
 	</insert>
 </mapper>
